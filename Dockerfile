@@ -125,7 +125,7 @@ RUN --mount=type=cache,id=s/92ca8a61-c1ba-421f-a389-d48ac7258c2d-npm-cache,targe
 # at build time. Turbopack compiles in native Rust memory that lives outside the
 # V8 heap, so OMNIROUTE_BUILD_MEMORY_MB cannot bound it and a memory-constrained
 # build host gets SIGKILLed by the cgroup OOM killer with no error message.
-ARG OMNIROUTE_USE_TURBOPACK=1
+ARG OMNIROUTE_USE_TURBOPACK=0
 ENV OMNIROUTE_USE_TURBOPACK="${OMNIROUTE_USE_TURBOPACK}"
 
 # Next.js basePath is fixed at build time; pass OMNIROUTE_BASE_PATH here when the
@@ -161,7 +161,7 @@ ENV OMNIROUTE_MITM_STUB=1
 # (OMNIROUTE_MEMORY_MB). Override: `--build-arg OMNIROUTE_BUILD_MEMORY_MB=6144`.
 # Default raised 4096 → 6144 (#10060): the Next 16 production pass on a codebase
 # this size intermittently OOMs a build worker at 4 GB on memory-tight hosts.
-ARG OMNIROUTE_BUILD_MEMORY_MB=6144
+ARG OMNIROUTE_BUILD_MEMORY_MB=2048
 ENV NODE_OPTIONS="--max-old-space-size=${OMNIROUTE_BUILD_MEMORY_MB}"
 
 # Cap Next.js build worker pools. Next 16 defaults to `os.cpus().length - 1`
@@ -193,7 +193,7 @@ ENV NODE_OPTIONS="--max-old-space-size=${OMNIROUTE_BUILD_MEMORY_MB}"
 # the measured figure and fails if either knob is raised past what a 16 GB
 # runner holds. Override for a big builder: `--build-arg
 # OMNIROUTE_BUILD_WORKERS=8`.
-ARG OMNIROUTE_BUILD_WORKERS=2
+ARG OMNIROUTE_BUILD_WORKERS=1
 ENV CIRCLE_NODE_TOTAL=${OMNIROUTE_BUILD_WORKERS}
 
 COPY . ./

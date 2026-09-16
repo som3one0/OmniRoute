@@ -9,12 +9,8 @@ services:
       - key: PORT
         value: "20128"
       - key: OMNIROUTE_BUILD_MEMORY_MB
-        value: "4096"
+        value: "2048"
       - key: OMNIROUTE_BUILD_WORKERS
         value: "1"
       - key: OMNIROUTE_USE_TURBOPACK
         value: "0"
-    disk:
-      name: omnidata
-      mountPath: /app/data
-      sizeGB: 1
