@@ -161,8 +161,12 @@ ENV OMNIROUTE_MITM_STUB=1
 # (OMNIROUTE_MEMORY_MB). Override: `--build-arg OMNIROUTE_BUILD_MEMORY_MB=6144`.
 # Default raised 4096 → 6144 (#10060): the Next 16 production pass on a codebase
 # this size intermittently OOMs a build worker at 4 GB on memory-tight hosts.
-ARG OMNIROUTE_BUILD_MEMORY_MB=2048
+ARG OMNIROUTE_BUILD_MEMORY_MB=1024
 ENV NODE_OPTIONS="--max-old-space-size=${OMNIROUTE_BUILD_MEMORY_MB}"
+
+# Prevent SIGABRT at worker teardown (#10060)
+ARG OMNIROUTE_BETTER_SQLITE3_STUB=1
+ENV OMNIROUTE_BETTER_SQLITE3_STUB="${OMNIROUTE_BETTER_SQLITE3_STUB}"
 
 # Cap Next.js build worker pools. Next 16 defaults to `os.cpus().length - 1`
 # workers for page-data collection (31 on a 32-core builder); on memory-tight
