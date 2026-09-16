@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: omniroute
+    env: docker
+    region: ohio
+    plan: free # Change this if you need more resources
+    healthCheckPath: /api/monitoring/health # As specified in their docs/healthcheck
+    envVars:
+      - key: PORT
+        value: "20128"
+    disk:
+      name: omnidata
+      mountPath: /app/data
+      sizeGB: 1
