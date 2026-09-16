@@ -14,3 +14,5 @@ services:
         value: "1"
       - key: OMNIROUTE_USE_TURBOPACK
         value: "0"
+      - key: OMNIROUTE_MEMORY_MB
+        value: "384"
