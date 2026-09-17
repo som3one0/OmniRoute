@@ -3,7 +3,7 @@ services:
     name: omniroute
     env: image
     image:
-      url: ghcr.io/som3one0/omniroute:latest
+      url: docker.io/diegosouzapw/omniroute:latest
     region: ohio
     plan: free
     envVars:
