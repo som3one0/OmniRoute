@@ -13,3 +13,7 @@ services:
         value: "512"
       - key: INITIAL_PASSWORD
         value: "Som3one"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: API_KEY_SECRET
+        generateValue: true
